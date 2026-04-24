@@ -1,29 +1,17 @@
+/* ============================================================
+   PROTOTYPE 1 - COLOUR PALETTE & SETTINGS
+   Fewer variables than later versions, no status colours yet
+   ============================================================ */
 :root {
-    /* Primary Colors */
-    --primary: #212eb0;
-    --primary-light: #e8f0fe;
-    --primary-text: #2856c7;
-    --primary-muted: #b7bdec;
-
-    /* Status Colors */
-    --success: #1f8a4c;
-    --success-bg: #e3f6ea;
-    --danger: #DC143C;
-    --danger-bg: #fde6e2;
-    --neutral: #5a5f6b;
-    --neutral-bg: #f1f1f3;
-
-    /* Grayscale */
-    --white: #ffffff;
-    --black: #000000;
-    --gray-100: #f8f9fa;
-    --gray-200: #e9e9ec;
-    --gray-300: #dcdde1;
-    --gray-400: #b9bcc3;
-    --gray-500: #8a8f98;
-    --gray-600: #5a5f6b;
-
-    /* Spacing & Layout */
+    --page-bg: black;
+    --on-blue-text: #ffffff;
+    --text: #000000;
+    --muted: #8a8f98;
+    --faint: #b9bcc3;
+    --line: #e9e9ec;
+    --line-strong: #dcdde1;
+    --blue-bg: #e8f0fe;
+    --blue-text: #2856c7;
     --radius: 6px;
     --pc-pad-x: 36px;
     --font: Arial, Helvetica, sans-serif;
@@ -41,9 +29,9 @@
 html,
 body {
     height: 100%;
-    background: var(--white);
+    background: #ffffff;
     font-family: var(--font);
-    color: var(--black);
+    color: var(--text);
 }
 
 /* ============================================================
@@ -57,7 +45,7 @@ body {
     bottom: 0;
     display: flex;
     flex-direction: column;
-    background: var(--white);
+    background: #ffffff;
     overflow-y: auto;
 }
 
@@ -69,105 +57,21 @@ body {
 }
 
 /* ============================================================
-   HEADER
+   HEADER - centred title only
    ============================================================ */
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    background: var(--primary);
-    color: var(--white);
+    background: var(--page-bg);
+    color: var(--on-blue-text);
     padding: 18px 36px;
-    border-bottom: 2px solid var(--white);
 }
 
-
-.header-center,
-.header-right {
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-.header-center {
-    flex: 6;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-}
-
-.header-right {
-    justify-content: flex-end;
-    gap: 11px;
-}
-
-.header-clock {
-    display: flex;
-    align-items: baseline;
-    gap: 9px;
-}
-
-.header-clock .clock {
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.header-clock .date {
-    font-size: 13px;
-    color: var(--primary-muted);
-}
-
-.header-center h1 {
+.header h1 {
     font-size: 25px;
     font-weight: 800;
-}
-
-.header-center .header-sub {
-    font-size: 15px;
-    color: var(--primary-muted);
-    margin-top: 3px;
-}
-
-/* ============================================================
-   PILLS
-   ============================================================ */
-.pill {
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 13px;
-    border-radius: 14px;
-    white-space: nowrap;
-}
-
-.pill-neutral {
-    background: rgba(255, 255, 255, 0.16);
-    color: var(--white);
-}
-
-.pill-green {
-    background: var(--success-bg);
-    color: var(--success);
-}
-
-.pill-red {
-    background: var(--danger-bg);
-    color: var(--danger);
-}
-
-/* ============================================================
-   LOGIN BUTTON
-   ============================================================ */
-.login-btn {
-    background: var(--danger);
-    color: var(--white);
-    border: 1px solid var(--danger);
-    padding: 8px 20px;
-    border-radius: var(--radius);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: var(--font);
 }
 
 /* ============================================================
@@ -175,7 +79,6 @@ body {
    ============================================================ */
 .dashboard {
     display: flex;
-    gap: 0;
     flex: 1;
     min-height: 0;
 }
@@ -188,7 +91,7 @@ body {
     min-width: 224px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--gray-300);
+    border-right: 1px solid var(--line-strong);
     padding: 25px 20px 36px 0;
     height: 100%;
     overflow: hidden;
@@ -199,44 +102,9 @@ body {
     font-size: 12px;
     letter-spacing: 1.4px;
     text-transform: uppercase;
-    color: var(--gray-500);
+    color: var(--muted);
     padding-bottom: 16px;
     flex-shrink: 0;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    border: 1px solid var(--gray-300);
-    border-radius: var(--radius);
-    padding: 0 11px;
-    margin-bottom: 11px;
-    flex-shrink: 0;
-}
-
-.search-box input {
-    flex: 1;
-    padding: 9px 0;
-    font-size: 15px;
-    border: none;
-    outline: none;
-    font-family: var(--font);
-    background: transparent;
-    color: var(--black);
-}
-
-.search-box .clear {
-    background: transparent;
-    border: none;
-    color: var(--gray-400);
-    cursor: pointer;
-    font-size: 18px;
-    display: none;
-}
-
-.search-box .clear.visible {
-    display: block;
 }
 
 .teacher-list {
@@ -245,34 +113,18 @@ body {
     min-height: 0;
 }
 
-/* Teacher Items */
 .teacher {
-    display: flex;
-    align-items: center;
-    gap: 9px;
     padding: 12px 5px;
     font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--line);
     min-height: 48px;
-}
-
-.teacher .name {
-    flex: 1;
-    font-weight: 500;
+    display: flex;
+    align-items: center;
 }
 
 
-
-.teacher .teacher-name {
-    flex: 1;
-    font-weight: 500;
-}
-
-.teacher:hover {
-    background: var(--neutral-bg);
-    border-radius: var(--radius);
-}
 
 /* ============================================================
    TIMETABLE PANEL (RIGHT)
@@ -286,9 +138,6 @@ body {
 }
 
 .timetable-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
     padding-bottom: 16px;
     flex-shrink: 0;
 }
@@ -298,117 +147,19 @@ body {
     font-weight: 800;
 }
 
-/* ============================================================
-   STATUS DISPLAY
-   ============================================================ */
-.status {
-    flex-shrink: 0;
-    padding: 8px 0 16px 0;
-}
-
-/* An empty status box would otherwise still take up its padding */
-.status:empty {
-    display: none;
-}
-
-.admin-status:empty {
-    display: none;
-}
-
-.status .msg {
-    font-size: 15px;
-    color: var(--gray-500);
-    font-weight: 500;
-}
-
-/* ============================================================
-   TIMETABLE LIST
-   ============================================================ */
 .timetable-list {
     flex: 1;
     padding-top: 16px;
-    overflow-y: auto;
-}
-
-.day-header {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    color: var(--gray-400);
-    padding-bottom: 11px;
-}
-
-/* Lesson Rows */
-.lesson {
-    display: grid;
-    grid-template-columns: 94px 123px 1fr auto;
-    gap: 11px;
-    align-items: center;
-    padding: 11px var(--pc-pad-x) 11px 29px;
-    margin: 0 calc(-1 * var(--pc-pad-x)) 0 -29px;
-    font-size: 16px;
-    border-bottom: 1px solid var(--gray-200);
-}
-
-.lesson:last-child {
-    border-bottom: none;
-}
-
-.lesson .period {
-    font-weight: 600;
-    font-size: 15px;
-}
-
-.lesson .time {
-    color: var(--gray-400);
-    font-size: 13px;
-}
-
-.lesson .class {
-    font-weight: 600;
-}
-
-.lesson .room {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 600;
-    background: var(--primary-light);
-    color: var(--primary-text);
-    padding: 3px 11px;
-    border-radius: 10px;
-    justify-self: start;
-}
-
-.lesson.current {
-    background: var(--success-bg);
-    border-radius: var(--radius);
-}
-
-.lesson .cur-badge {
-    background: var(--success-bg);
-    color: var(--success);
-    padding: 3px 11px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.no-lessons {
-    padding: 30px 0;
-    text-align: center;
-    color: var(--gray-500);
-    font-size: 15px;
+    overflow: auto;
 }
 
 /* ============================================================
-   LOCATION DISPLAY - class and room summary above the schedule
+   LOCATION DISPLAY - class and room only
    ============================================================ */
 .location {
     display: flex;
     align-items: flex-start;
     gap: 27px;
-    padding-bottom: 20px;
 }
 
 .location .field-label {
@@ -416,7 +167,7 @@ body {
     font-weight: 700;
     letter-spacing: 1.4px;
     text-transform: uppercase;
-    color: var(--gray-500);
+    color: var(--muted);
     padding-bottom: 9px;
 }
 
@@ -425,96 +176,41 @@ body {
     font-weight: 700;
 }
 
-.location .room-pill {
+.location .room {
     display: inline-block;
     font-size: 16px;
     font-weight: 700;
-    background: var(--primary-light);
-    color: var(--primary-text);
+    background: var(--blue-bg);
+    color: var(--blue-text);
     padding: 6px 16px;
     border-radius: 14px;
 }
 
+.location .none {
+    font-size: 16px;
+    color: var(--muted);
+}
+
 /* ============================================================
-   DROP MESSAGE
+   MESSAGES
    ============================================================ */
 .drop-msg {
     text-align: center;
     padding: 45px 18px;
-    color: var(--gray-500);
-}
-
-.admin-status {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    flex-shrink: 0;
-    padding-bottom: 16px;
-}
-
-.admin-msg {
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.clear-btn {
-    background: var(--danger);
-    color: var(--white);
-    border: none;
-    padding: 9px 20px;
-    border-radius: var(--radius);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: var(--font);
+    color: var(--muted);
 }
 
 .drop-msg .main {
     font-size: 16px;
     font-weight: 600;
-    color: var(--black);
+    color: var(--text);
 }
 
-/* ============================================================
-   ADMIN DRAG AND DROP
-   ============================================================ */
-.teacher[draggable="true"] {
-    cursor: grab;
-}
-
-.teacher.dragging {
-    opacity: 0.45;
-}
-
-/* Absent teachers are struck out in the list */
-.teacher.is-absent .teacher-name {
-    color: var(--danger);
-    text-decoration: line-through;
-}
-
-/* Both zones shade very lightly while a teacher is held over them */
-#dropZonePanel.drag-over,
-.teacher-list.drag-over {
-    background: var(--gray-100);
-    border-radius: var(--radius);
-}
-
-.link-btn {
-    background: transparent;
-    border: none;
-    color: var(--primary-text);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 6px 0;
-    font-family: var(--font);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.link-btn:hover {
-    color: var(--primary);
+.no-results {
+    text-align: center;
+    padding: 27px;
+    color: var(--muted);
+    font-size: 15px;
 }
 
 /* ============================================================
@@ -528,98 +224,28 @@ footer {
     text-align: center;
     padding: 5px;
     font-size: 12px;
-    color: var(--gray-400);
+    color: var(--faint);
     pointer-events: none;
 }
 
 /* ============================================================
-   LOADING & EMPTY STATES
-   ============================================================ */
-.loading,
-.no-results {
-    text-align: center;
-    padding: 27px;
-    color: var(--gray-500);
-    font-size: 15px;
-}
-
-/* ============================================================
-   RESPONSIVE
+   RESPONSIVE - only one breakpoint at this stage
    ============================================================ */
 @media (max-width: 800px) {
-    :root {
-        --pc-pad-x: 20px;
-    }
-
-    .header {
-        padding: 16px 20px;
-    }
-
-    .header-clock .date {
-        display: none;
-    }
-
-    .header-center h1 {
-        font-size: 21px;
-    }
-
-    .teacher-panel {
-        flex: 0 0 32%;
-        min-width: 179px;
-    }
-
-    .lesson {
-        grid-template-columns: 72px 90px 1fr auto;
-        font-size: 15px;
-    }
-
-    .timetable-header .selected {
-        font-size: 21px;
-    }
-
-    .location {
-        gap: 18px;
-    }
-}
-
-@media (max-width: 650px) {
     :root {
         --pc-pad-x: 16px;
     }
 
     .header {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 7px;
         padding: 16px;
     }
 
-    .header-left {
-        order: 1;
-        flex: 0 0 auto;
-    }
-
-    .header-center {
-        order: 0;
-        flex: 0 0 100%;
-    }
-
-    .header-right {
-        order: 2;
-        flex: 0 0 auto;
-        flex-wrap: wrap;
-        gap: 9px;
-    }
-
-    .header-clock .date {
-        display: none;
+    .header h1 {
+        font-size: 21px;
     }
 
     .dashboard {
         flex-direction: column;
-        flex: none;
-        min-height: 450px;
-        gap: 16px;
     }
 
     .teacher-panel {
@@ -627,80 +253,24 @@ footer {
         max-height: 200px;
         min-width: auto;
         border-right: none;
-        border-bottom: 1px solid var(--gray-300);
-        padding-right: 0;
-        padding-bottom: 16px;
+        border-bottom: 1px solid var(--line-strong);
+        padding: 16px 0;
         height: auto;
-        overflow: visible;
-    }
-
-    .teacher-list {
-        max-height: 130px;
-        min-height: 0;
     }
 
     .timetable-panel {
-        flex: none;
-        min-height: 280px;
         padding: 16px 0 0;
-    }
-
-    .timetable-header {
-        flex-direction: column;
-        gap: 9px;
-        align-items: flex-start;
     }
 
     .timetable-header .selected {
         font-size: 20px;
     }
 
-    .lesson {
-        grid-template-columns: 56px 72px 1fr auto;
-        gap: 7px;
-        font-size: 13px;
-        padding: 9px 0;
-        margin: 0;
-    }
-
-    .drop-msg {
-        padding: 25px 13px;
-    }
-
-    .teacher {
-        padding: 10px 3px;
-        font-size: 15px;
-    }
-
-    footer {
-        font-size: 11px;
-    }
-}
-
-@media (max-width: 400px) {
-    .timetable-header .selected {
-        font-size: 18px;
+    .location {
+        gap: 18px;
     }
 
     .location .class-name {
         font-size: 18px;
-    }
-
-    .lesson {
-        grid-template-columns: 45px 60px 1fr auto;
-        gap: 6px;
-        font-size: 12px;
-    }
-
-    .header-center h1 {
-        font-size: 19px;
-    }
-
-    .teacher-panel {
-        max-height: 160px;
-    }
-
-    .teacher-list {
-        max-height: 100px;
     }
 }
