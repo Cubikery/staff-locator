@@ -1,45 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- character set (supports all languages) -->
     <meta charset="UTF-8" />
+    <!-- makes page work on phones/tablets -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- shows on browser tab -->
     <title>Staff Locator</title>
+    <!-- Link to external CSS file for styling -->
     <link rel="stylesheet" href="index.css" />
 </head>
 
 <body>
+    <!-- Main container - wraps everything -->
     <div class="app-shell">
-        <!-- HEADER - title only, no branding or sign in at this stage -->
+        <!-- HEADER - top bar -->
         <div class="header">
-            <h1>Staff Locator</h1>
+            <!-- Center: page title and school name -->
+            <div class="header-center">
+                <h1>Staff Locator</h1>
+                <p class="header-sub"></p>
+            </div>
+            <!-- Right: status badges and login button -->
+            <div class="header-right">
+                <button class="login-btn" id="loginBtn">Login</button>
+            </div>
         </div>
 
+        <!-- MAIN CONTENT -->
         <div class="page-content">
             <div class="dashboard">
 
                 <!-- LEFT PANEL: teacher list -->
                 <div class="teacher-panel">
                     <div class="panel-title">Teachers</div>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search teachers..." />
+                    </div>
+                    <!-- List of teachers -->
                     <div class="teacher-list" id="teacherListContainer"></div>
                 </div>
 
-                <!-- RIGHT PANEL: teacher name, then class and room only -->
-                <div class="timetable-panel">
+                <!-- RIGHT PANEL: timetable for selected teacher -->
+                <div class="timetable-panel" id="dropZonePanel">
+                    <!-- Header with teacher name and clear button -->
                     <div class="timetable-header">
                         <div class="selected" id="selectedTeacherName">Select a teacher</div>
                     </div>
-
+                    <!-- Teacher's current status -->
+                    <div class="status" id="statusDisplay"></div>
+                    <!-- Absence message and clear button (admin only) -->
+                    <div class="admin-status" id="adminStatus"></div>
+                    <!-- Timetable view -->
                     <div class="timetable-list" id="timetableView">
                         <div class="drop-msg">
-                            <div class="main">Click a teacher to view their location</div>
+                            <div class="main">Click or drag a teacher to view location</div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- FOOTER -->
+            <footer>Staff Locator</footer>
         </div>
     </div>
 
+    <!-- Link to external JavaScript file for interactivity -->
     <script src="index.js"></script>
 </body>
 </html>
