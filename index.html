@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Locator</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <div class="app-shell">
+        <!-- HEADER - title only, no branding or sign in at this stage -->
+        <div class="header">
+            <h1>Staff Locator</h1>
+        </div>
+
+        <div class="page-content">
+            <div class="dashboard">
+
+                <!-- LEFT PANEL: teacher list -->
+                <div class="teacher-panel">
+                    <div class="panel-title">Teachers</div>
+                    <div class="teacher-list" id="teacherListContainer"></div>
+                </div>
+
+                <!-- RIGHT PANEL: teacher name, then class and room only -->
+                <div class="timetable-panel">
+                    <div class="timetable-header">
+                        <div class="selected" id="selectedTeacherName">Select a teacher</div>
+                    </div>
+
+                    <div class="timetable-list" id="timetableView">
+                        <div class="drop-msg">
+                            <div class="main">Click a teacher to view their location</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
