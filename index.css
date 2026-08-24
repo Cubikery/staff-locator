@@ -1,0 +1,905 @@
+/* ============================================================
+   COLOR PALETTE & SETTINGS
+   ============================================================ */
+:root {
+    /* Main background colour - the blue header */
+    --page-bg: #212eb0;
+    /* White text on blue background */
+    --on-blue-text: #ffffff;
+    /* Lighter blue-grey text on blue background */
+    --on-blue-muted: #b7bdec;
+
+    /* Card and text colours */
+    --card-bg: #ffffff;
+    /* White background for cards */
+    --text: #000000;
+    /* Main text colour - black */
+    --muted: #8a8f98;
+    /* Grey text for less important info */
+    --faint: #b9bcc3;
+    /* Very light grey for borders/labels */
+    --line: #e9e9ec;
+    /* Light grey lines (separators) */
+    --line-strong: #dcdde1;
+    /* Slightly darker grey lines */
+
+    /* Status colours (green = good, red = absent, blue = info) */
+    --blue-bg: #e8f0fe;
+    /* Light blue background */
+    --blue-text: #2856c7;
+    /* Dark blue text */
+    --green-bg: #e3f6ea;
+    /* Light green background */
+    --green-text: #1f8a4c;
+    /* Dark green text */
+    --red-bg: #fde6e2;
+    /* Light red background */
+    --red-text: #DC143C;
+    /* Dark red text (crimson) */
+    --neutral-bg: #f1f1f3;
+    /* Light grey background */
+    --neutral-text: #5a5f6b;
+    /* Dark grey text */
+
+    /* Size settings */
+    --radius: 6px;
+    /* How round the corners are */
+    --pc-pad-x: 36px;
+    /* Left/right padding on desktop */
+    --font: Arial, Helvetica, sans-serif;
+    /* Font family */
+}
+
+/* ============================================================
+   RESET STYLES
+   ============================================================ */
+* {
+    margin: 0;
+    /* Remove default margins */
+    padding: 0;
+    /* Remove default padding */
+    box-sizing: border-box;
+    /* Makes sizing easier - padding stays inside */
+}
+
+/* ============================================================
+   PAGE BACKGROUND
+   ============================================================ */
+html,
+body {
+    height: 100%;
+    /* Make page fill the whole screen */
+    background: #ffffff;
+    /* White background */
+    font-family: var(--font);
+    /* Use the font we defined above */
+    color: var(--text);
+    /* Use black text colour */
+}
+
+/* ============================================================
+   MAIN APP CONTAINER
+   ============================================================ */
+.app-shell {
+    position: fixed;
+    /* Stays in one place on screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    /* Uses flexbox for layout */
+    flex-direction: column;
+    /* Stacks items vertically */
+    background: #ffffff;
+    /* White background */
+    overflow-y: auto;
+    /* Allows scrolling if content is too tall */
+}
+
+/* Content area - grows to fill available space */
+.page-content {
+    flex: 1;
+    /* Takes up remaining space */
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--pc-pad-x);
+    /* Left/right padding from variables */
+}
+
+/* ============================================================
+   TOP BLUE HEADER BAR
+   The blue strip at the top of the page.
+   ============================================================ */
+.header {
+    display: flex;
+    /* Uses flexbox to arrange items in a row */
+    justify-content: space-between;
+    /* Spreads items out: left, center, right */
+    align-items: center;
+    /* Vertically centers everything */
+    flex-shrink: 0;
+    /* Prevents header from shrinking */
+    background: var(--page-bg);
+    /* Blue background from variables */
+    color: var(--on-blue-text);
+    /* White text */
+    padding: 18px 36px;
+    /* Top/bottom and left/right spacing */
+    border-bottom: 2px solid #ffffff;
+    /* White line at bottom */
+}
+
+/* Three sections of the header - left, center, right */
+.header-left,
+.header-center,
+.header-right {
+    flex: 1;
+    /* Each takes equal space */
+    display: flex;
+    align-items: center;
+    /* Vertically center content */
+}
+
+.header-left {
+    gap: 11px;
+    /* Space between clock and date */
+}
+
+.header-center {
+    justify-content: center;
+    /* Center the title horizontally */
+    flex-direction: column;
+    /* Stack title and subtitle vertically */
+    text-align: center;
+    /* Center text alignment */
+}
+
+.header-right {
+    justify-content: flex-end;
+    /* Push content to the right */
+    gap: 11px;
+    /* Space between items */
+}
+
+/* Clock and date styling */
+.header-clock {
+    display: flex;
+    align-items: baseline;
+    /* Aligns text at the bottom */
+    gap: 9px;
+    /* Space between clock and date */
+}
+
+.header-clock .clock {
+    font-size: 15px;
+    font-weight: 600;
+    /* Semi-bold */
+}
+
+.header-clock .date {
+    font-size: 13px;
+    color: var(--on-blue-muted);
+    /* Lighter colour */
+}
+
+/* Title styling */
+.header-center h1 {
+    font-size: 25px;
+    font-weight: 800;
+    /* Bold */
+}
+
+.header-center .header-sub {
+    font-size: 15px;
+    color: var(--on-blue-muted);
+    /* Lighter colour */
+    margin-top: 3px;
+    /* Small gap above */
+}
+
+/* ============================================================
+   PILLS - Small rounded badges
+   Used for status indicators (Day, Open/Closed, etc.)
+   ============================================================ */
+.pill {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 13px;
+    /* Space inside the pill */
+    border-radius: 14px;
+    /* Rounded corners */
+    white-space: nowrap;
+    /* Prevents text from wrapping */
+}
+
+.pill-neutral {
+    background: rgba(255, 255, 255, 0.16);
+    /* Semi-transparent white */
+    color: var(--on-blue-text);
+    /* White text */
+}
+
+/* ============================================================
+   LOGIN BUTTON
+   The red button in the top-right corner
+   ============================================================ */
+.login-btn {
+    background: var(--red-text);
+    /* Red background */
+    color: #ffffff;
+    /* White text */
+    border: 1px solid var(--red-text);
+    /* Red border */
+    padding: 8px 20px;
+    /* Space inside button */
+    border-radius: var(--radius);
+    /* Rounded corners */
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    /* Hand cursor on hover */
+    font-family: var(--font);
+}
+
+/* ============================================================
+   DASHBOARD - Two columns side by side
+   Left: Teacher list  |  Right: Timetable
+   ============================================================ */
+.dashboard {
+    display: flex;
+    gap: 0;
+    /* No gap between columns */
+    flex: 1;
+    /* Takes up remaining space */
+    min-height: 0;
+    /* Allows flex to work properly */
+}
+
+/* ============================================================
+   LEFT PANEL - Teacher list
+   ============================================================ */
+.teacher-panel {
+    flex: 0 0 27%;
+    /* Takes up 27% of the width */
+    min-width: 224px;
+    /* Minimum width before it shrinks */
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--line-strong);
+    /* Separator line */
+    padding: 25px 20px 36px 0;
+    /* Top, right, bottom, left */
+    height: 100%;
+    overflow: hidden;
+    /* Hides anything that overflows */
+}
+
+.panel-title {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    /* Extra space between letters */
+    text-transform: uppercase;
+    /* ALL CAPS */
+    color: var(--muted);
+    padding-bottom: 16px;
+    flex-shrink: 0;
+    /* Prevents title from shrinking */
+}
+
+/* ============================================================
+   SEARCH BOX
+   The input field where users type to filter teachers
+   ============================================================ */
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid var(--line-strong);
+    /* Grey border */
+    border-radius: var(--radius);
+    padding: 0 11px;
+    margin-bottom: 11px;
+    flex-shrink: 0;
+}
+
+.search-box input {
+    flex: 1;
+    /* Takes up remaining space */
+    padding: 9px 0;
+    font-size: 15px;
+    border: none;
+    /* Remove default border */
+    outline: none;
+    /* Remove focus outline */
+    font-family: var(--font);
+    background: transparent;
+    color: var(--text);
+}
+
+/* Clear button (×) - hidden by default, shows when typing */
+.search-box .clear {
+    background: transparent;
+    border: none;
+    color: var(--faint);
+    cursor: pointer;
+    font-size: 18px;
+    display: none;
+    /* Hidden by default */
+}
+
+.search-box .clear.visible {
+    display: block;
+    /* Shown when there's text to clear */
+}
+
+/* Teacher list - scrollable area */
+.teacher-list {
+    flex: 1;
+    /* Takes up remaining space */
+    overflow-y: auto;
+    /* Scrolls if too many teachers */
+    min-height: 0;
+}
+
+/* ============================================================
+   TEACHER ITEMS
+   Each teacher in the list
+   ============================================================ */
+.teacher {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 5px;
+    font-size: 16px;
+    cursor: pointer;
+    /* Clickable */
+    border-bottom: 1px solid var(--line);
+    /* Light separator */
+    min-height: 48px;
+}
+
+/* When teacher is absent - strike-through text */
+.teacher.absent .name {
+    text-decoration: line-through;
+    /* Cross out the name */
+    color: var(--red-text);
+}
+
+.teacher .name {
+    flex: 1;
+    /* Takes up available space */
+    font-weight: 500;
+}
+
+/* ============================================================
+   RIGHT PANEL - Timetable
+   Shows the selected teacher's schedule
+   ============================================================ */
+.timetable-panel {
+    flex: 1;
+    /* Takes up remaining space */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 25px 0 36px 29px;
+    /* Top, right, bottom, left */
+}
+
+/* Header of the timetable panel */
+.timetable-header {
+    display: flex;
+    justify-content: space-between;
+    /* Pushes "Clear" to the right */
+    align-items: baseline;
+    /* Aligns text at the bottom */
+    padding-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.timetable-header .selected {
+    font-size: 27px;
+    font-weight: 800;
+    /* Very bold */
+}
+
+/* Clear button - red, like the login button */
+.timetable-header .clear-btn {
+    background: var(--red-text);
+    color: #ffffff;
+    border: 1px solid var(--red-text);
+    padding: 7px 18px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font);
+}
+
+/* ============================================================
+   STATUS DISPLAY
+   Shows the teacher's current status (e.g., "In Room 12")
+   ============================================================ */
+.status {
+    padding: 0 var(--pc-pad-x) 18px 29px;
+    margin: 0 calc(-1 * var(--pc-pad-x)) 0 -29px;
+    /* Negative margin to stretch full width */
+    flex-shrink: 0;
+    min-height: 40px;
+}
+
+/* Large status badge */
+.status .badge-lg {
+    display: inline-block;
+    padding: 7px 18px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+/* Different colours for different statuses */
+.status .badge-lg.pill-green {
+    background: var(--green-bg);
+    color: var(--green-text);
+}
+
+.status .badge-lg.pill-neutral {
+    background: var(--neutral-bg);
+    color: var(--neutral-text);
+}
+
+.status .badge-lg.pill-red {
+    background: var(--red-bg);
+    color: var(--red-text);
+}
+
+/* Class and room details */
+.status .details {
+    display: flex;
+    gap: 27px;
+    margin-top: 13px;
+    flex-wrap: wrap;
+    /* Wraps on small screens */
+}
+
+.status .details .item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.status .details .item .label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--faint);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.status .details .item .value.class {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.status .details .item .value.room {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    background: var(--blue-bg);
+    color: var(--blue-text);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.status .msg {
+    font-size: 15px;
+    color: var(--text);
+    margin-top: 9px;
+}
+
+/* ============================================================
+   TIMETABLE LIST
+   Shows all periods for the selected teacher
+   ============================================================ */
+.timetable-list {
+    flex: 1;
+    padding-top: 16px;
+}
+
+.day-header {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding-bottom: 11px;
+}
+
+/* ============================================================
+   LESSON ROWS
+   Each period in the timetable
+   Uses CSS Grid for layout
+   ============================================================ */
+.lesson {
+    display: grid;
+    grid-template-columns: 94px 123px 1fr auto auto;
+    /* Fixed widths for columns */
+    gap: 11px;
+    align-items: center;
+    padding: 11px var(--pc-pad-x) 11px 29px;
+    margin: 0 calc(-1 * var(--pc-pad-x)) 0 -29px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--line);
+    /* Separator line */
+}
+
+.lesson:last-child {
+    border-bottom: none;
+}
+
+.lesson .period {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.lesson .time {
+    color: var(--faint);
+    font-size: 13px;
+}
+
+.lesson .class {
+    font-weight: 600;
+}
+
+.lesson .class.is-free {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* Room badge - blue rounded box */
+.lesson .room {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--blue-bg);
+    color: var(--blue-text);
+    padding: 3px 11px;
+    border-radius: 10px;
+    justify-self: start;
+}
+
+/* Current period - highlighted in green */
+.lesson.current {
+    background: var(--green-bg);
+    border-radius: var(--radius);
+}
+
+/* "Now" badge - shows on the current period */
+.lesson .cur-badge {
+    background: var(--green-bg);
+    color: var(--green-text);
+    padding: 3px 11px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Absent row - faded */
+.lesson.absent {
+    opacity: 0.55;
+    /* Makes it look faded */
+}
+
+/* "absent" badge */
+.lesson .absent-badge {
+    background: var(--red-bg);
+    color: var(--red-text);
+    padding: 3px 11px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ============================================================
+   PERIOD PICKER - Admin panel
+   ============================================================ */
+.period-picker {
+    padding-top: 5px;
+}
+
+.period-picker-label {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 13px;
+}
+
+.period-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(134px, 1fr));
+    /* Responsive grid */
+    gap: 9px;
+}
+
+.period-chip {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--card-bg);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 10px 13px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font);
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.period-chip .chip-check {
+    width: 18px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--line-strong);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #fff;
+}
+
+.period-chip.absent {
+    background: var(--red-bg);
+    border-color: var(--red-text);
+    color: var(--red-text);
+}
+
+.period-chip.absent .chip-check {
+    background: var(--red-text);
+    border-color: var(--red-text);
+}
+
+.period-picker-actions {
+    display: flex;
+    gap: 18px;
+    margin-top: 16px;
+}
+
+.link-btn {
+    background: transparent;
+    border: none;
+    color: var(--blue-text);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    padding: 0;
+}
+
+/* ============================================================
+   DROP ZONE
+   Message shown when no teacher is selected
+   ============================================================ */
+.drop-msg {
+    text-align: center;
+    padding: 45px 18px;
+    color: var(--muted);
+}
+
+.drop-msg .main {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+    position: absolute;
+    /* Positioned relative to parent */
+    left: 0;
+    right: 0;
+    bottom: 9px;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    color: var(--faint);
+    pointer-events: none;
+    /* Prevents clicking/interaction */
+}
+
+/* ============================================================
+   LOADING & EMPTY STATES
+   Messages shown when data is loading or no results found
+   ============================================================ */
+.loading,
+.no-results {
+    text-align: center;
+    padding: 27px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   These styles make the page look good on different screen sizes
+   ============================================================ */
+
+/* TABLETS */
+@media (max-width: 800px) {
+    :root {
+        --pc-pad-x: 20px;
+        /* Smaller padding on tablets */
+    }
+
+    .header {
+        padding: 16px 20px;
+    }
+
+    .header-clock .date {
+        display: none;
+        /* Hide date on tablets to save space */
+    }
+
+    .header-center h1 {
+        font-size: 21px;
+        /* Smaller title */
+    }
+
+    .teacher-panel {
+        flex: 0 0 32%;
+        /* Slightly wider panel */
+        min-width: 179px;
+    }
+
+    .lesson {
+        grid-template-columns: 72px 90px 1fr auto;
+        /* Adjust column widths */
+        font-size: 15px;
+    }
+
+    .timetable-header .selected {
+        font-size: 21px;
+    }
+}
+
+/* PHONES */
+@media (max-width: 650px) {
+    :root {
+        --pc-pad-x: 16px;
+    }
+
+    /* Header becomes a stacked layout */
+    .header {
+        flex-wrap: wrap;
+        /* Allows items to wrap to next line */
+        justify-content: center;
+        gap: 7px;
+        padding: 16px;
+    }
+
+    .header-left {
+        order: 1;
+        /* Changes the order of items */
+        flex: 0 0 auto;
+    }
+
+    .header-center {
+        order: 0;
+        flex: 0 0 100%;
+        /* Takes full width */
+    }
+
+    .header-right {
+        order: 2;
+        flex: 0 0 auto;
+        flex-wrap: wrap;
+        gap: 9px;
+    }
+
+    .header-clock .date {
+        display: none;
+    }
+
+    /* Dashboard becomes a single column (stacked) */
+    .dashboard {
+        flex-direction: column;
+        flex: none;
+        min-height: 450px;
+        gap: 16px;
+    }
+
+    .teacher-panel {
+        flex: none;
+        max-height: 200px;
+        min-width: auto;
+        border-right: none;
+        /* Remove side border */
+        border-bottom: 1px solid var(--line-strong);
+        /* Add bottom border */
+        padding-right: 0;
+        padding-bottom: 16px;
+        height: auto;
+        overflow: visible;
+    }
+
+    .teacher-list {
+        max-height: 130px;
+        min-height: 0;
+    }
+
+    .timetable-panel {
+        flex: none;
+        min-height: 280px;
+        padding: 16px 0 0;
+    }
+
+    .timetable-header {
+        flex-direction: column;
+        /* Stack header items vertically */
+        gap: 9px;
+        align-items: flex-start;
+    }
+
+    .timetable-header .selected {
+        font-size: 20px;
+    }
+
+    .status {
+        padding: 0 0 18px;
+        margin: 0;
+    }
+
+    .status .details {
+        gap: 16px;
+    }
+
+    .lesson {
+        grid-template-columns: 56px 72px 1fr auto;
+        gap: 7px;
+        font-size: 13px;
+        padding: 9px 0;
+        margin: 0;
+    }
+
+    .drop-msg {
+        padding: 25px 13px;
+    }
+
+    .teacher {
+        padding: 10px 3px;
+        font-size: 15px;
+    }
+
+    footer {
+        font-size: 11px;
+    }
+}
+
+/* VERY SMALL PHONES */
+@media (max-width: 400px) {
+    .status .details {
+        flex-direction: column;
+        /* Stack details vertically */
+        gap: 9px;
+    }
+
+    .timetable-header .selected {
+        font-size: 18px;
+    }
+
+    .lesson {
+        grid-template-columns: 45px 60px 1fr auto;
+        /* Even smaller columns */
+        gap: 6px;
+        font-size: 12px;
+    }
+
+    .header-center h1 {
+        font-size: 19px;
+    }
+}

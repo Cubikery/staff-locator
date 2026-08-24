@@ -1,0 +1,145 @@
+/* COLOUR VARIABLES (like paint pots)*/
+:root {
+    --page-bg: #212eb0;        /* Blue background for the whole page */
+    --card-bg: #ffffff;        /* White background for the login card */
+    --text: #15181c;          /* Dark grey for most text */
+    --muted: #8a8f98;         /* Lighter grey for less important text */
+    --line-strong: #dcdde1;   /* Light grey for borders/lines */
+    --red-bg: #fde6e2;        /* Pinkish background for error messages */
+    --red-text: #c1432d;      /* Red colour for error text */
+    --radius: 6px;            /* Small rounded corners (for inputs/buttons) */
+    --card-radius: 14px;      /* Bigger rounded corners (for the main card) */
+}
+
+/* clean slate for all elements */
+* {
+    margin: 0;                /* Remove all default spacing */
+    padding: 0;               /* Remove all default padding */
+    box-sizing: border-box;   /* Makes width/height include padding & borders */
+    text-decoration: none;    /* Removes underlines from links */
+}
+
+/* PAGE BODY */
+body {
+    min-height: 100vh;        /* Minimum height = full screen height */
+    padding: 20px;            /* Space around the edges */
+    display: flex;            /* Flexbox */
+    justify-content: center;  /* Center content horizontally */
+    align-items: center;      /* Center content vertically */
+    background: var(--page-bg); /* Blue background */
+    font-family: Arial, Helvetica, sans-serif; /* Font style */
+    font-size: 14px;          /* Base text size */
+    color: var(--text);       /* Dark text colour */
+}
+
+/* LOGIN CONTAINER */
+.login-container {
+    width: 100%;              /* Takes full width of its parent */
+    max-width: 380px;         /* But stops growing at 380px */
+    display: flex;            /* Flexbox layout */
+    flex-direction: column;   /* Stacks items vertically (top to bottom) */
+    align-items: flex-start;  /* Aligns items to the left */
+}
+
+/* BACK BUTTON */
+.back-btn {
+    color: #ffffff;           /* White text */
+    font-size: 16px;          /* Slightly bigger than normal */
+    font-weight: 600;         /* Bold text */
+    margin-bottom: 16px;      /* Space below the button */
+}
+
+/* LOGIN CARD*/
+.login-card {
+    background: var(--card-bg);   /* White background */
+    width: 100%;                 /* Takes full width of container */
+    padding: 36px 32px;          /* Space inside: 36px top/bottom, 32px left/right */
+    border-radius: var(--card-radius); /* Rounded corners (14px) */
+}
+
+/* HEADER */
+.login-header {
+    margin-bottom: 24px;      /* Space below the header */
+    text-align: center;       /* Centers the text */
+}
+
+.login-header h1 {
+    font-size: 24px;          /* Big title */
+    font-weight: 800;         /* Extra bold */
+    margin-bottom: 6px;       /* Small space below title */
+}
+
+.login-header p {
+    color: var(--muted);      /* Grey colour (less important text) */
+    font-size: 14px;          /* Normal text size */
+}
+
+/* ERROR MESSAGE */
+.error-message {
+    background: var(--red-bg);    /* Pinkish background */
+    color: var(--red-text);       /* Red text */
+    padding: 10px 14px;           /* Space inside the box */
+    border-radius: var(--radius); /* Small rounded corners*/
+    font-size: 13px;              /* Slightly smaller text */
+    font-weight: 600;             /* Bold */
+    margin-bottom: 16px;          /* Space below the error */
+}
+
+/* FORM DIVS */
+.form-div {
+    margin-bottom: 18px;      /* Space between each form field */
+}
+
+.form-div span {
+    display: block;           /* Makes the label take its own line */
+    font-weight: 600;         /* Bold label text */
+    margin-bottom: 6px;       /* Small space between label and input */
+    font-size: 12px;          /* Smaller text for labels */
+}
+
+/* INPUT FIELDS */
+.form-div input {
+    width: 100%;              /* Takes full width of the form */
+    padding: 10px 12px;       /* Space inside the box */
+    border: 1px solid var(--line-strong); /* Light grey border */
+    border-radius: var(--radius); /* Small rounded corners (6px) */
+    font-size: 14px;          /* Text inside the input */
+    outline: none;            /* Removes the blue glow when you click on it */
+}
+
+
+/* SIGN IN BUTTON */
+.signin-btn {
+    width: 100%;              /* Full width button */
+    padding: 11px;            /* Space inside the button */
+    background: var(--page-bg); /* Blue background */
+    color: #fff;              /* White text */
+    border: none;             /* No border */
+    border-radius: var(--radius); /* Small rounded corners */
+    font-size: 14px;          /* Text size */
+    font-weight: 700;         /* Bold text */
+    cursor: pointer;          /* Changes mouse to a hand when hovering */
+    margin-top: 4px;          /* Small space above the button */
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 20px;         /* Space above the footer */
+    font-size: 12px;          /* Small text */
+    color: #b7bdec;           /* Light blue */
+    text-align: center;       /* Centers the text */
+    width: 100%;              /* Takes full width */
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 480px) {
+    /* This only applies when screen width is 480px or less (phones) */
+
+    .login-card {
+        padding: 28px 22px;   /* Less padding on small screens (saves space) */
+    }
+
+    .login-header h1 {
+        font-size: 21px;      /* Slightly smaller title on phones */
+    }
+}

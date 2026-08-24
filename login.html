@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- Tells the browser this is an HTML5 document -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 'UTF-8' supports all characters -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Makes the page responsive: matches screen width and no zoom on load -->
+
+    <title>Login</title>
+    <!-- Text -->
+
+    <link rel="stylesheet" href="login.css">
+    <!-- Links the CSS file -->
+</head>
+
+<body>
+    <div class="login-container">
+        <!-- A 'container' div -->
+
+        <!-- Back button -->
+        <a href="index.html" class="back-btn">← Back</a>
+        <!--A hyperlink takes user to the "index.html". it applies "back-btn"  styles -->
+
+        <div class="login-card">
+            <!-- A container for the login box (styled as a "login-card") -->
+
+            <div class="login-header">
+                <!-- Header of the card -->
+                <h1>Staff Locator</h1>
+                <p>Sign in to mark teacher absences</p>
+                <!-- description under the heading -->
+            </div>
+
+            <!-- Error message display -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <!-- used by JavaScript to target this element. hidden by default -->
+            </div>
+
+            <form id="loginForm">
+                <!-- collect user input. JavaScript listens for 'submit' on this form. -->
+
+                <div class="form-div">
+                    <!-- 'form-div' groups a label + input field -->
+                    <span>Username</span>
+                    <!-- inline text-->
+
+                    <input type="text" id="username" placeholder="Enter your username" autocomplete="username">
+                    <!-- creates a text box for username input.JavaScript reads this value.
+                         placeholder hint text inside box. autocomplete suggest saved usernames. -->
+                </div>
+
+                <div class="form-div">
+                    <!-- 'form-div' groups a label + input field -->
+                    <span>Password</span>
+                    <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+                    <!-- creates a text box for password input.JavaScript reads this value.
+                         placeholder hint text inside box. autocomplete suggest saved password. -->
+                </div>
+
+                <button type="submit" id="signBtn" class="signin-btn">Sign in</button>
+                <!-- a clickable button.when clicked, it triggers the form's 'submit' event. -->
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>Saint Kentigern College</p>
+            <!-- Footer text at the bottom of the page -->
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+    <!-- Links the JavaScript file.-->
+</body>
+</html>
