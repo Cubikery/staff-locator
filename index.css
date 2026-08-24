@@ -1,0 +1,276 @@
+/* ============================================================
+   PROTOTYPE 1 - COLOUR PALETTE & SETTINGS
+   Fewer variables than later versions, no status colours yet
+   ============================================================ */
+:root {
+    --page-bg: black;
+    --on-blue-text: #ffffff;
+    --text: #000000;
+    --muted: #8a8f98;
+    --faint: #b9bcc3;
+    --line: #e9e9ec;
+    --line-strong: #dcdde1;
+    --blue-bg: #e8f0fe;
+    --blue-text: #2856c7;
+    --radius: 6px;
+    --pc-pad-x: 36px;
+    --font: Arial, Helvetica, sans-serif;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    background: #ffffff;
+    font-family: var(--font);
+    color: var(--text);
+}
+
+/* ============================================================
+   APP CONTAINER
+   ============================================================ */
+.app-shell {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    overflow-y: auto;
+}
+
+.page-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--pc-pad-x);
+}
+
+/* ============================================================
+   HEADER - centred title only
+   ============================================================ */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background: var(--page-bg);
+    color: var(--on-blue-text);
+    padding: 18px 36px;
+}
+
+.header h1 {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+.dashboard {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+/* ============================================================
+   TEACHER PANEL (LEFT)
+   ============================================================ */
+.teacher-panel {
+    flex: 0 0 27%;
+    min-width: 224px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--line-strong);
+    padding: 25px 20px 36px 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.panel-title {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.teacher-list {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.teacher {
+    padding: 12px 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 1px solid var(--line);
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* ============================================================
+   TIMETABLE PANEL (RIGHT)
+   ============================================================ */
+.timetable-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 25px 0 36px 29px;
+}
+
+.timetable-header {
+    padding-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.timetable-header .selected {
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.timetable-list {
+    flex: 1;
+    padding-top: 16px;
+    overflow: auto;
+}
+
+/* ============================================================
+   LOCATION DISPLAY - class and room only
+   ============================================================ */
+.location {
+    display: flex;
+    align-items: flex-start;
+    gap: 27px;
+}
+
+.location .field-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 9px;
+}
+
+.location .class-name {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.location .room {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--blue-bg);
+    color: var(--blue-text);
+    padding: 6px 16px;
+    border-radius: 14px;
+}
+
+.location .none {
+    font-size: 16px;
+    color: var(--muted);
+}
+
+/* ============================================================
+   MESSAGES
+   ============================================================ */
+.drop-msg {
+    text-align: center;
+    padding: 45px 18px;
+    color: var(--muted);
+}
+
+.drop-msg .main {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.no-results {
+    text-align: center;
+    padding: 27px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 9px;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    color: var(--faint);
+    pointer-events: none;
+}
+
+/* ============================================================
+   RESPONSIVE - only one breakpoint at this stage
+   ============================================================ */
+@media (max-width: 800px) {
+    :root {
+        --pc-pad-x: 16px;
+    }
+
+    .header {
+        padding: 16px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .teacher-panel {
+        flex: none;
+        max-height: 200px;
+        min-width: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line-strong);
+        padding: 16px 0;
+        height: auto;
+    }
+
+    .timetable-panel {
+        padding: 16px 0 0;
+    }
+
+    .timetable-header .selected {
+        font-size: 20px;
+    }
+
+    .location {
+        gap: 18px;
+    }
+
+    .location .class-name {
+        font-size: 18px;
+    }
+}
