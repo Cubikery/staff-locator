@@ -36,10 +36,6 @@
     /* Light red background */
     --red-text: #DC143C;
     /* Dark red text (crimson) */
-    --neutral-bg: #f1f1f3;
-    /* Light grey background */
-    --neutral-text: #5a5f6b;
-    /* Dark grey text */
 
     /* Size settings */
     --radius: 6px;
@@ -318,22 +314,6 @@ body {
     color: var(--text);
 }
 
-/* Clear button (×) - hidden by default, shows when typing */
-.search-box .clear {
-    background: transparent;
-    border: none;
-    color: var(--faint);
-    cursor: pointer;
-    font-size: 18px;
-    display: none;
-    /* Hidden by default */
-}
-
-.search-box .clear.visible {
-    display: block;
-    /* Shown when there's text to clear */
-}
-
 /* Teacher list - scrollable area */
 .teacher-list {
     flex: 1;
@@ -445,11 +425,6 @@ body {
     color: var(--green-text);
 }
 
-.status .badge-lg.pill-neutral {
-    background: var(--neutral-bg);
-    color: var(--neutral-text);
-}
-
 .status .badge-lg.pill-red {
     background: var(--red-bg);
     color: var(--red-text);
@@ -550,11 +525,6 @@ body {
 }
 
 .lesson .class {
-    font-weight: 600;
-}
-
-.lesson .class.is-free {
-    color: var(--text);
     font-weight: 600;
 }
 
@@ -799,10 +769,6 @@ footer {
         flex: 0 0 auto;
         flex-wrap: wrap;
         gap: 9px;
-    }
-
-    .header-clock .date {
-        display: none;
     }
 
     /* Dashboard becomes a single column (stacked) */
