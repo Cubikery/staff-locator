@@ -1,13 +1,8 @@
-//
-// CONFIGURATION - School day settings
-//
-
-// The first day of our 7-day timetable cycle (YYYY-MM-DD format)
-// This is the "Day 1" of the cycle
-const ANCHOR_DATE = "2026-01-14";
+// Sets Day 1 of the 7 day timetable cycle (YYYY-MM-DD)
+const ANCHOR_DATE = "2026-01-15";
 
 // School day structure: all periods from morning to afternoon
-// Each period has: period number, start time, end time, and display label
+// Each period has: period number, start time, end time, and what it display
 const SCHOOL_DAY = {
   periods: [
     { period: 0, start: "08:40", end: "08:50", label: "Tutor" },
@@ -20,22 +15,17 @@ const SCHOOL_DAY = {
   ],
 };
 
-// ============================================================
 // GLOBAL STATE VARIABLES - Keep track of everything
-// ============================================================
 
 let allLessons = []; // Array of all lessons from the CSV file
 let allTeachers = []; // Array of unique teacher names (sorted A-Z)
 let currentTeacher = null; // Which teacher is currently selected (clicked)
 let absentPeriods = {}; // Object: { teacherName: Set(periodNumbers) }
 
-// ============================================================
 // ABSENCE STORAGE - localStorage
-// ============================================================
 
-/**
- * Saves the absence data to be remembered even after refreshing the page
- */
+/*Saves the absence data to be remembered even after refreshing the page*/
+
 function saveAbsences() {
   // Create an object with today's date and all absent periods
   const data = { date: getTodayDate() };
@@ -45,10 +35,8 @@ function saveAbsences() {
   localStorage.setItem("absences", JSON.stringify(data));
 }
 
-/**
- * Gets today's date in YYYY-MM-DD format
- * Example: 2026-06-23
- */
+/** Gets today's date in YYYY-MM-DD format*/
+
 function getTodayDate() {
   const now = new Date();
   return (
@@ -115,7 +103,6 @@ function parseCSV(text) {
     // Create a clean lesson object
     data.push({
       teacher: entry.teacher || "",
-      tutorGroup: entry.tutor_group || "",
       day: entry.day,
       period: entry.period,
       className: entry.class || "",
@@ -131,7 +118,7 @@ function parseCSV(text) {
  * Load the timetable CSV file and initialize the application
  */
 async function loadCSV() {
-  const resp = await fetch("timetable.csv"); // Get the file
+  const resp = await fetch("timetable.csv"); // Reads the file
   const text = await resp.text(); // Read it as text
   allLessons = parseCSV(text); // Parse into lesson objects
 
@@ -177,20 +164,6 @@ function isFullyAbsentToday(name) {
     allPeriods.size > 0 &&
     Array.from(allPeriods).every((p) => set.has(p))
   );
-}
-
-/**
- * Format absence periods as a comma-separated string
- * Example: "Period 1, Period 3, Period 5"
- */
-function formatAbsencePeriods(set) {
-  return Array.from(set)
-    .sort((a, b) => a - b) // Sort in order
-    .map((p) => {
-      const info = SCHOOL_DAY.periods.find((s) => s.period === p);
-      return info ? info.label : "Period " + p;
-    })
-    .join(", ");
 }
 
 /**
@@ -274,7 +247,6 @@ function getCurrentPeriod() {
     }
   }
 
-  // weekDay is only used above to work out isSchoolDay; no caller needs it back
   return { period, isSchoolDay, timetableDay };
 }
 
@@ -286,7 +258,7 @@ function getTeacherStatus(name) {
 
   // Check if teacher is marked absent for this period
   if (isAbsentAtPeriod(name, cur.period)) {
-    return { status: "absent", message: "Absent" };
+    return { status: "absent" };
   }
 
   // Check if teacher has a lesson at this period
@@ -304,10 +276,10 @@ function getTeacherStatus(name) {
       return { status: "teaching", message: "In class now" };
     }
     // Otherwise they are free
-    return { status: "free", message: "Free" };
+    return { status: "free" };
   }
 
-  return { status: "absent", message: "Not available" };
+  return { status: "absent" };
 }
 
 /**
@@ -355,34 +327,9 @@ function renderList() {
 
   // Build HTML for each teacher
   filtered.forEach((t) => {
-    const active = currentTeacher === t ? "active" : "";
-    const status = getTeacherStatus(t);
-    const fullyAbsentToday = isFullyAbsentToday(t);
-    const absences = getAbsencePeriodsForTeacher(t);
-    const hasPartialAbsence = absences.size > 0;
-
-    // Map status to display configuration
-    const config = {
-      teaching: { label: "Teaching", cls: "teaching" },
-      free: { label: "Free", cls: "free" },
-      absent: { label: "Absent", cls: "absent" },
-    }[status.status] || { label: "", cls: "" };
-
-    let dotCls = config.cls;
-    let dotLabel = config.label;
-
-    // If absent, show a special dot
-    if (hasPartialAbsence) {
-      dotCls = "absent";
-      dotLabel = "Absent during " + formatAbsencePeriods(absences) + " today";
-    }
-
-    const badge = `<span class="status-dot ${dotCls}" aria-label="${dotLabel}"></span>`;
-
-    const isAbsent = fullyAbsentToday;
-    html += `<div class="teacher ${active} ${isAbsent ? "absent" : ""}" data-name="${t}" draggable="true">
+    const isAbsent = isFullyAbsentToday(t);
+    html += `<div class="teacher${isAbsent ? " absent" : ""}" data-name="${t}" draggable="true">
             <span class="name">${t}</span>
-            ${badge}
         </div>`;
   });
 
@@ -410,8 +357,6 @@ function showTimetable(name) {
   const cur = getCurrentPeriod();
   const today = cur.timetableDay;
   const todayLessons = lessons.filter((l) => l.day === today);
-  const status = getTeacherStatus(name);
-  const absentNow = status.status === "absent";
 
   // --- ADMIN PANEL ---
   if (isLoggedIn) {
@@ -459,6 +404,8 @@ function showTimetable(name) {
   }
 
   // --- PUBLIC PANEL ---
+  const status = getTeacherStatus(name);
+  const absentNow = status.status === "absent";
 
   // Find the current lesson
   const currentLesson = todayLessons.find((l) => l.period === cur.period);
@@ -519,15 +466,6 @@ function showTimetable(name) {
     statusHtml = `
             ${details}
         `;
-  } else {
-    // Teacher is absent
-    let msg = "absent";
-    if (!cur.isSchoolDay) msg = "Weekend";
-    else if (cur.period === null) msg = "Interval";
-
-    statusHtml = `
-            <div class="badge-lg pill-neutral">${msg}</div>
-        `;
   }
 
   // Set the status display
@@ -544,8 +482,7 @@ function showTimetable(name) {
 
     // Find the lesson for this period
     const lesson = todayLessons.find((l) => l.period === p);
-    const isCur =
-      cur.isSchoolDay && cur.timetableDay === today && cur.period === p;
+    const isCur = cur.isSchoolDay && cur.period === p;
     const isRowAbsent = isAbsentAtPeriod(name, p);
 
     let cls = "lesson";
@@ -561,12 +498,10 @@ function showTimetable(name) {
       roomDisplay = lesson.room || "";
     }
 
-    const isFree = classDisplay === "Free";
-
     html += `<div class="${cls}">
             <span class="period">${label}</span>
             <span class="time">${time}</span>
-            <span class="class${isFree ? " is-free" : ""}">${escapeHtml(classDisplay)}</span>
+            <span class="class">${escapeHtml(classDisplay)}</span>
             ${roomDisplay ? `<span class="room">${escapeHtml(roomDisplay)}</span>` : "<span></span>"}
             ${
               isRowAbsent
@@ -623,7 +558,7 @@ function escapeHtml(str) {
   if (!str) return "";
   return str.replace(
     /[&<>]/g,
-    (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[m] || m,
+    (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[m],
   );
 }
 
@@ -641,9 +576,8 @@ function updateUI() {
     title.innerText = "Select a teacher";
     status.innerHTML = "";
     if (isLoggedIn) {
-      status.innerHTML = "";
       container.innerHTML = `
-                <div class="drop-msg drop-msg-logged-in">
+                <div class="drop-msg">
                     <div class="main">Drag or click a teacher to mark their absence</div>
                 </div>`;
     } else {
@@ -663,7 +597,6 @@ function updateUI() {
 function selectTeacher(name) {
   if (!name) return;
   currentTeacher = name;
-  renderList();
   showTimetable(name);
 }
 
@@ -704,7 +637,6 @@ function setupDragDrop() {
  * Set up touch-based drag and drop for mobile devices
  */
 function setupTouchDrag() {
-  let touchStartTarget = null;
   let touchTeacherName = null;
   let touchClone = null;
   let touchOffsetX = 0;
@@ -720,7 +652,6 @@ function setupTouchDrag() {
       touchTeacherName = teacherEl.getAttribute("data-name");
       if (!touchTeacherName) return;
 
-      touchStartTarget = teacherEl;
       const touch = e.touches[0];
       const rect = teacherEl.getBoundingClientRect();
       touchOffsetX = touch.clientX - rect.left;
@@ -739,7 +670,6 @@ function setupTouchDrag() {
         top: touch.clientY - touchOffsetY + "px",
       });
       document.body.appendChild(touchClone);
-      teacherEl.classList.add("dragging");
     },
     { passive: true },
   );
@@ -782,11 +712,6 @@ function setupTouchDrag() {
         selectTeacher(touchTeacherName);
       }
 
-      // Clean up
-      if (touchStartTarget) {
-        touchStartTarget.classList.remove("dragging");
-        touchStartTarget = null;
-      }
       touchTeacherName = null;
     },
     { passive: true },
@@ -814,15 +739,9 @@ function attachEvents() {
       if (name) {
         try {
           e.dataTransfer.setData("text/plain", name);
-        } catch (e) {}
+        } catch {}
         e.dataTransfer.effectAllowed = "move";
-        this.classList.add("dragging");
       }
-    };
-
-    // Drag end handler
-    el.ondragend = function (e) {
-      this.classList.remove("dragging");
     };
   });
 }
@@ -837,10 +756,10 @@ function attachEvents() {
 function getGlobalStatusLabel() {
   const cur = getCurrentPeriod();
   if (!cur.isSchoolDay || cur.period === null) {
-    return { label: "Absent", cls: "neutral" };
+    return "Absent";
   }
   const info = SCHOOL_DAY.periods.find((s) => s.period === cur.period);
-  return { label: info ? info.label : "Absent", cls: "neutral" };
+  return info.label;
 }
 
 /**
@@ -852,9 +771,7 @@ function updateHeaderStatus() {
   const statusBadge = document.getElementById("headerStatusBadge");
   if (dayBadge) dayBadge.textContent = "Day " + cur.timetableDay;
   if (statusBadge) {
-    const g = getGlobalStatusLabel();
-    statusBadge.textContent = g.label;
-    statusBadge.className = "pill pill-" + g.cls;
+    statusBadge.textContent = getGlobalStatusLabel();
   }
 }
 
@@ -885,35 +802,25 @@ function updateClock() {
 }
 
 // ============================================================
-// SEARCH & CLEAR CONTROLS - Search bar and clear buttons
+// SEARCH CONTROLS
 // ============================================================
 
 /**
- * Set up search input and clear button functionality
+ * Set up search input and teacher selection reset functionality
  */
 function setupSearchControls() {
   const searchInput = document.getElementById("searchInput");
-  const clearBtn = document.getElementById("clearSearchBtn");
   const clearListBtn = document.getElementById("clearListBtn");
 
   // Live search as user types
   searchInput.oninput = function () {
     renderList();
-    clearBtn.classList.toggle("visible", this.value.length > 0);
-  };
-
-  // Clear search button
-  clearBtn.onclick = function () {
-    searchInput.value = "";
-    renderList();
-    this.classList.remove("visible");
   };
 
   // Clear selected teacher button
   clearListBtn.onclick = function () {
     currentTeacher = null;
     updateUI();
-    renderList();
   };
 }
 
